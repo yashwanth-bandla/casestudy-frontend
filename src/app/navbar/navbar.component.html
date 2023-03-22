@@ -1,0 +1,16 @@
+<nav>
+  <div (click)="goToHome()" class="hoverpoint"><h1>My Mart</h1></div>
+  <div>
+    <h3>Welcome {{ user.name }}</h3>
+  </div>
+  <div (click)="goToCart()" class="rightalign right hoverpoint">
+    <a> <fa-icon [icon]="carticon"></fa-icon> Cart </a>
+  </div>
+  <!-- *ngIf="isAdmin"  -->
+  <div (click)="goToProducts()" class="right hoverpoint">  
+    <a> <fa-icon [icon]="plusicon"></fa-icon> Modify Products </a>
+  </div>
+  <div (click)="logOutUser()" class="right hoverpoint">
+    <a><fa-icon [icon]="usericon"></fa-icon> SignOut</a>
+  </div>
+</nav>

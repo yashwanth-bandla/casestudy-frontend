@@ -1,0 +1,40 @@
+nav {
+  background-color: lightslategrey;
+  height: 90px;
+  display: flex;
+  align-items: center;
+}
+h1 {
+  padding-left: 20px;
+}
+.rightalign {
+  margin-left: auto;
+}
+.right {
+  font-size: larger;
+  padding: 15px;
+  margin-right: 10px;
+  background-color: slategrey;
+  border-radius: 20px;
+  justify-self: flex-end;
+}
+/* .hoverpoint{
+    cursor: pointer;
+} */
+a {
+  
+  text-decoration: none;
+  
+}
+.hoverpoint {
+  cursor: pointer;
+}
+h3 {
+  margin-left: 30px;
+  background-color: rgb(197, 224, 236);
+  padding: 15px;
+  border-radius: 20px;
+}
+/* div{
+  color: white;
+} */

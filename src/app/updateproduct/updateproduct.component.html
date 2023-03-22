@@ -1,0 +1,70 @@
+<app-navbar [user]="user" [userId]="userId"></app-navbar>
+<div class="wrapper">
+    <h2>Update Product</h2>
+   <form #userForm="ngForm">
+     <br />
+     <div class="form-group">
+        <label for="id">ID of product: </label>
+        <input
+          type="number"
+          [(ngModel)]="productDetails.id"
+          id="id"
+          name="id"
+          class="form-control"
+          required
+        />
+      </div>
+     <div class="form-group">
+       <label for="name">Name of product: </label>
+       <input
+         type="text"
+         [(ngModel)]="productDetails.name"
+         id="name"
+         name="name"
+         class="form-control"
+         
+       />
+     </div>
+     <div class="form-group">
+       <label for="details">Details of product: </label>
+       <input
+         type="text"
+         [(ngModel)]="productDetails.details"
+         id="details"
+         name="details"
+         class="form-control"
+         
+       />
+     </div>
+     <div class="form-group">
+       <label for="price">Price of product: </label>
+       <input
+         type="text"
+         [(ngModel)]="productDetails.price"
+         id="price"
+         name="price"
+         class="form-control"
+         
+       />
+     </div>
+     <div class="form-group">
+       <label for="name">Image url of product: </label>
+       <input
+         type="text"
+         [(ngModel)]="productDetails.imgsrc"
+         id="image"
+         name="image"
+         class="form-control"
+         
+       />
+     </div>
+     <button
+       id="submitbtn"
+       (click)="updateProduct()"
+       class="btn btn-primary"
+       type="submit"
+     >
+       Update Product
+     </button><span *ngIf="didUpdateProduct">Product successfully updated!</span>
+   </form>
+ </div>

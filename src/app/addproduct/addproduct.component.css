@@ -1,0 +1,21 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+}
+h2{
+    align-self: center;
+}
+form{
+    width: 80%;
+    align-self: center;
+}
+button{
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+input{
+    margin-bottom: 15px;
+}
+span{
+    margin-left: 20px;
+}

@@ -1,0 +1,14 @@
+<app-navbar [user]="user" [userId]="userId"></app-navbar>
+<div *ngIf="isAdmin" class="wrapper">
+  <div>
+    <button (click)="goToUpdate()" class="btn btn-primary">Update Product</button>
+  </div>
+
+  <div>
+    <button (click)="goToAdd()" class="btn btn-primary">Add Product</button>
+  </div>
+
+ 
+
+</div>
+<div class="errorMsg" *ngIf="!isAdmin"><h2>You are not an admin</h2></div>

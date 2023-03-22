@@ -1,0 +1,23 @@
+<div class="wrapper">
+    <h1 class="title"> MyMart </h1>
+    <h2>Please Login:</h2>
+    <div class="login">
+        <form #userForm="ngForm" >
+            {{userModel.name}} <br>
+            {{userForm.value | json}} <br>
+            <label for="email">Email: </label>
+            <input id="email" name="email" type="text" [(ngModel)]="loginUserDetails.username">
+            <br> <br>
+            <label for="password">Password: </label>
+            <input id="password" name="password" type="password" [(ngModel)]="loginUserDetails.password">
+            <br> <br>
+            <input type="submit" (click)="verifyUser()"  value="Login" id="loginbtn" >
+        </form>
+    </div>
+    <div class="footer">
+        <div> <a href="#">Forgot password?</a> </div>
+        <br>
+        <div><a href="/signup">New user? Sign up</a></div>
+        
+    </div>
+</div>

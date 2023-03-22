@@ -1,0 +1,19 @@
+<div class="col-sm-6">
+  <div class="card" style="width: 300px; margin: 10px">
+    <img
+      class="card-img-top"
+      src={{product.imgsrc}}
+      style="width: auto; height: 300px"
+      alt="Product Image"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">
+        {{ product.details }}
+      </p>
+
+      <p class="card-text">price: Rs.{{ product.price }}</p>
+      <a (click)="addToCart()" class="btn btn-primary">Add to Cart</a>
+    </div>
+  </div>
+</div>
