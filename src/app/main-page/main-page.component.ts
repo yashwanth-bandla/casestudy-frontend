@@ -14,7 +14,7 @@ export class MainPageComponent {
   response: any;
   items: any = [];
   completed: boolean = false;
-  i = 1;
+  // i = 1;
   userId: any = 0;
   user: any;
   userName: string;
