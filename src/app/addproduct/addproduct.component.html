@@ -47,16 +47,37 @@
         required
       />
     </div>
-    
-      <button
-        id="submitbtn"
-        (click)="addProduct()"
-        class="btn btn-primary"
-        type="submit"
-      >
-        Add Product
-      </button>
-      <span *ngIf="didAddProduct">Product successfully added!</span>
-    
+    <div class="form-group">
+      <label for="name">category of product: </label>
+      <input
+        type="text"
+        [(ngModel)]="productDetails.category.category"
+        id="category"
+        name="category"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="name">Sub-Category of product: </label>
+      <input
+        type="text"
+        [(ngModel)]="productDetails.subCategory.name"
+        id="subcategory"
+        name="subcategory"
+        class="form-control"
+        required
+      />
+    </div>
+
+    <button
+      id="submitbtn"
+      (click)="addProduct()"
+      class="btn btn-primary"
+      type="submit"
+    >
+      Add Product
+    </button>
+    <span *ngIf="didAddProduct">Product successfully added!</span>
   </form>
 </div>

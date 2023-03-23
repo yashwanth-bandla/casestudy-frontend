@@ -33,13 +33,16 @@ export class ProductCardComponent implements OnInit {
 
   addToCart() {
     console.log(this.product.productId);
-    
-    this.http.get(
-      'http://localhost:8080/cart/' +
-        this.userId +
-        '/add/' +
-        this.product.productId
-    ).subscribe(response=>{console.log(response);
-    });
+
+    this.http
+      .get(
+        'http://localhost:8080/cart/' +
+          this.userId +
+          '/add/' +
+          this.product.productId
+      )
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 }

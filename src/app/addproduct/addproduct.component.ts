@@ -14,7 +14,13 @@ export class AddproductComponent {
   productDetails: any = {
     name:'',
     details:'',
-    imgsrc:''
+    imgsrc:'',
+    category:{
+      category:''
+    },
+    subCategory:{
+      name:''
+    }
   }
 
   addProductUrl:string = 'http://localhost:8080/products/addProduct';
@@ -36,7 +42,6 @@ export class AddproductComponent {
   addProduct(){
     this.http.post(this.addProductUrl,this.productDetails).subscribe(response=>{
       this.response = response;
-      console.log(this.response);
       this.didAddProduct = true;
     })
   }

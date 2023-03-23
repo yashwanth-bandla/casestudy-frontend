@@ -13,7 +13,14 @@ export class UpdateproductComponent {
 
 
   productDetails: any = {
-
+    // name:'',
+    // imgsrc:'',
+    // category:{
+    //   category:''
+    // },
+    // subCategory:{
+    //   name:''
+    // }
   }
 
   updateProductUrl:string = 'http://localhost:8080/products/update';
