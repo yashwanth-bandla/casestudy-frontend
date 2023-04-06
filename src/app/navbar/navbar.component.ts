@@ -5,6 +5,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { LoginService } from '../login.service';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { DataSharingService } from '../data-sharing.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,53 +17,63 @@ export class NavbarComponent {
   carticon = faCartShopping;
   plusicon = faPlusSquare;
 
-  @Input('user')
   user: any;
-
-  @Input('userId')
   userId: number;
+  userName: string;
 
-  isAdmin:boolean ;
+  isAdmin: boolean;
 
-
-  constructor(private loginservice: LoginService, private router: Router) {
-
+  constructor(
+    private loginservice: LoginService,
+    private router: Router,
+    private _dataSharingService: DataSharingService
+  ) {
+    this._dataSharingService.userSource$.subscribe((res) => {
+      this.user = res;
+      this.userId = res.userId;
+      this.userName = res.name;
+      if (this.user.role == 'admin') {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+    });
   }
 
-  ngOnInit(){
-    if(this.user.role=="admin"){
-      this.isAdmin=true;
-      console.log("the role is: " + this.user.role);
-      
-    } else{
-      this.isAdmin=false;
-      console.log("the role is: " + this.user.role);
-    }
-  }
+  ngOnInit() {}
+  // ngOnChanges() {
+  //   if (this.user.role == 'admin') {
+  //     this.isAdmin = true;
+  //     console.log('the role is: ' + this.user.role + 'from onchanges');
+  //   } else {
+  //     this.isAdmin = false;
+  //     console.log('the role is: ' + this.user.role + 'from onchanges');
+  //   }
+  // }
 
   logOutUser() {
     this.loginservice.logOut();
-    location.reload();
+    this.router.navigate(['/login']);
   }
 
   goToCart() {
-    const navigationExtras: NavigationExtras = {
-      state: { user: this.user },
-    };
-    this.router.navigate(['/cart'], navigationExtras);
+    // const navigationExtras: NavigationExtras = {
+    //   state: { user: this.user },
+    // };
+    this.router.navigate(['/cart']);
   }
 
   goToHome() {
-    const navigationExtras: NavigationExtras = {
-      state: { userId: this.userId, user: this.user },
-    };
-    this.router.navigate(['/'], navigationExtras);
+    // const navigationExtras: NavigationExtras = {
+    //   state: { userId: this.userId, user: this.user },
+    // };
+    this.router.navigate(['/']);
   }
 
   goToProducts() {
-    const navigationExtras: NavigationExtras = {
-      state: { userId: this.userId, user: this.user },
-    };
-    this.router.navigate(['/products'], navigationExtras);
+    // const navigationExtras: NavigationExtras = {
+    //   state: { userId: this.userId, user: this.user },
+    // };
+    this.router.navigate(['/products']);
   }
 }

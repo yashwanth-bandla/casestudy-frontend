@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+  <div class="title">
+    <h1>Your Orders</h1>
+  </div>
+
+  <div class="emptyMsg" *ngIf="isOrdersEmpty">
+    <h2>Your order history is empty!</h2>
+  </div>
+
+  <div class="body">
+    <div *ngIf="!isOrdersEmpty" class="main-body">
+      <div class="itemrow">
+        <div class="miniHeading">Image</div>
+        <div class="miniHeading">Name</div>
+        <div class="miniHeading">Quantity</div>
+        <div class="miniHeading">Price</div>
+        <div class="miniHeading">Subtotal</div>
+        <div class="miniHeading">Status</div>
+      </div>
+      <div class="itemrow" *ngFor="let item of products">
+        <div class="image" style="height: 100px; width: 100px">
+          <img
+            src="{{ item.product.imgsrc }}"
+            alt="product image"
+            width="100px"
+            height="100px"
+          />
+        </div>
+        <div class="itemdetails">
+          {{ item.product.name }}
+        </div>
+        <div class="itemdetails">
+          {{ item.quantity }}
+        </div>
+        <div class="itemdetails">Rs.{{ item.product.price }}</div>
+        <div class="itemdetails">
+          Rs.{{ item.quantity * item.product.price }}
+        </div>
+        <div class="itemdetails">
+            {{ this.user.orders.orderStatus }}
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

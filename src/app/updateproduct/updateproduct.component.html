@@ -1,4 +1,4 @@
-<app-navbar [user]="user" [userId]="userId"></app-navbar>
+<app-navbar></app-navbar>
 <div class="wrapper">
   <h2>Update Product</h2>
   <form #userForm="ngForm">
@@ -56,11 +56,11 @@
     </div>
     <button
       id="submitbtn"
-      (click)="updateProduct()"
+      (click)="updateProduct(); userForm.resetForm()"
       class="btn btn-primary"
       type="submit"
     >
       Update Product</button
-    ><span *ngIf="didUpdateProduct">Product successfully updated!</span>
+    ><span *ngIf="isProductUpdated">Product successfully updated!</span>
   </form>
 </div>

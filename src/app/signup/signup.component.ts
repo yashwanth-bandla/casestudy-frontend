@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
   signUpDetails: any = {
-    name: '',
-    email: '',
-    password: '',
+    // name: '',
+    // email: '',
+    // password: '',
     address: {
       street: '',
       city: '',
@@ -27,8 +27,7 @@ export class SignupComponent {
   signUpUser() {
     this.http.post(this.signUpUrl, this.signUpDetails).subscribe(
       (response) => {
-        this.response = response;
-        console.log(this.response);
+        console.log(response);
         this.router.navigate(['/login']);
       },
       (error) => {

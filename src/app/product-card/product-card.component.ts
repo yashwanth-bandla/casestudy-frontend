@@ -32,7 +32,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   addToCart() {
-    console.log(this.product.productId);
+    // console.log(this.product.productId);
 
     this.http
       .get(
@@ -42,7 +42,7 @@ export class ProductCardComponent implements OnInit {
           this.product.productId
       )
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
       });
   }
 }

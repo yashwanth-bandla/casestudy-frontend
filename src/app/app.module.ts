@@ -19,6 +19,9 @@ import { AuthGuard } from './auth.guard';
 import { ProductComponent } from './product/product.component';
 import { AddproductComponent } from './addproduct/addproduct.component';
 import { UpdateproductComponent } from './updateproduct/updateproduct.component';
+import { DataSharingService } from './data-sharing.service';
+import { OrdersPageComponent } from './orders-page/orders-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { UpdateproductComponent } from './updateproduct/updateproduct.component'
     ProductComponent,
     AddproductComponent,
     UpdateproductComponent,
+    OrdersPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,8 +44,14 @@ import { UpdateproductComponent } from './updateproduct/updateproduct.component'
     HttpClientModule,
     FontAwesomeModule,
     FormsModule,
+    BrowserAnimationsModule,
   ],
-  providers: [LoginService, AuthGuard,[{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true}]],
+  providers: [
+    LoginService,
+    DataSharingService,
+    AuthGuard,
+    [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

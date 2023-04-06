@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataSharingService } from '../data-sharing.service';
 import { Product } from './product.model';
 import { User } from './user.model';
 
@@ -19,9 +20,8 @@ export class MainPageComponent {
   subcategories: any = [];
 
   completed: boolean = false;
-  // i = 1;
   userId: any = 0;
-  user: any;
+  user: User;
   userName: string;
   responseList: any;
   searchString: string;
@@ -34,32 +34,35 @@ export class MainPageComponent {
   selectedCategory: string = 'none';
   selectedSubCategory: string = 'none';
 
-  constructor(private http: HttpClient, private router: Router) {
-    if (!!localStorage.getItem('token')) {
-      const navigation = this.router.getCurrentNavigation();
-      if (navigation != null) {
-        const state = navigation.extras.state as { userId: number };
-        this.userId = state.userId;
-      }
-      console.log('user id is ' + this.userId);
-
-      if (!this.user) {
-        this.http
-          .get('http://localhost:8080/getProfile/' + this.userId)
-          .subscribe((response) => {
-            this.user = response;
-            this.userName = this.user.name;
-            console.log(this.user);
-          });
-      }
-    }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private _dataSharingService: DataSharingService
+  ) {
+    // if (!!localStorage.getItem('token')) {
+    //   const navigation = this.router.getCurrentNavigation();
+    //   if (navigation != null) {
+    //     const state = navigation.extras.state as { userId: number };
+    //     this.userId = state.userId;
+    //   }
+    //   console.log('user id is ' + this.userId);
+    //   if (!this.user) {
+    //     this.http
+    //       .get('http://localhost:8080/getProfile/' + this.userId)
+    //       .subscribe((response) => {
+    //         this.user = response;
+    //         this.userName = this.user.name;
+    //         console.log(this.user);
+    //       });
+    //   }
+    // }
   }
 
   ngOnInit() {
     this.http
       .get('http://localhost:8080/products/getAllProducts')
       .subscribe((response) => {
-        this.responseList = response;
+        this.responseList = response; //on replacing with response, getting type error
         console.log(this.responseList);
 
         for (let productone in this.responseList) {
@@ -71,34 +74,32 @@ export class MainPageComponent {
           );
           this.subcategories = [...new Set(this.subcategories)];
           this.filteredItems.push(this.responseList[productone]);
-          console.log(this.responseList[productone]);
         }
       });
+    this._dataSharingService.userSource$.subscribe((res) => {
+      // console.log(res);
+
+      this.user = res;
+      // console.log(this.user);
+
+      this.userId = res.userId;
+      this.userName = res.name;
+    });
   }
 
   filterProducts() {
     let newFilteredItems: any[] = [];
-    // for (let oneitem in this.items) {
-    //   if (
-    //     this.items[oneitem].category.category == this.selectedCategory &&
-    //     this.items[oneitem].subCategory.name == this.selectedSubCategory
-    //   ) {
-    //     newFilteredItems.push(this.items[oneitem]);
-    //   }
-    // }
-    // this.filteredItems = newFilteredItems;
-    // console.log(this.filteredItems);
 
     this.http
       .get(
         this.filterUrl + this.selectedCategory + '/' + this.selectedSubCategory
       )
       .subscribe((res) => {
-        this.filterResponse = res;
+        this.filterResponse = res; //on replacing with res, getting type error
         console.log(this.filterResponse);
 
         for (let item1 in this.filterResponse) {
-          console.log(item1);
+          // console.log(item1);
 
           newFilteredItems.push(this.filterResponse[item1]);
         }
@@ -110,7 +111,7 @@ export class MainPageComponent {
     this.filteredItems = this.items;
     this.selectedCategory = 'none';
     this.selectedSubCategory = 'none';
-    this.searchString=""
+    this.searchString = '';
   }
   searchProducts() {
     this.searchedList = [];
@@ -120,11 +121,12 @@ export class MainPageComponent {
         .subscribe((res) => {
           this.searchResponse = res;
           for (let item1 in this.searchResponse) {
+            //on replacing with res, getting type error
             this.searchedList.push(this.searchResponse[item1]);
           }
         });
       this.filteredItems = this.searchedList;
-    } else{
+    } else {
       this.filteredItems = this.items;
     }
   }

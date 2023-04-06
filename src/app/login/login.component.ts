@@ -3,6 +3,7 @@ import { User } from '../main-page/user.model';
 import { NavigationExtras, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from '../login.service';
+import { DataSharingService } from '../data-sharing.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,50 +22,46 @@ export class LoginComponent {
   loginUrl = 'http://localhost:8080/login';
   response: any;
   userId: number;
-
-  @Output() childToParent = new EventEmitter<number>();
+  user: any;
+  loginUnsuccessful: boolean = false;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private _dataSharingService: DataSharingService
   ) {}
 
   verifyUser() {
-    // console.log(this.loginUserDetails);
-
-    // this.http
-    //   .post(this.loginUrl, this.loginUserDetails)
-    //   .subscribe((Response) => {
-    //     console.log(Response);
-    //     this.response = Response;
-    //     this.userModel = {
-    //       "name": this.response.name,
-    //     }
-    //     this.router.navigate(['/'])
-    //   },err=>{console.log(err)}
-    //   );
-
     this.loginService.generateToken(this.loginUserDetails).subscribe(
       (response: any) => {
         console.log(response.token);
         console.log(response);
 
         this.loginService.loginUser(response.token);
-        console.log(response.id);
 
         this.userId = response.id;
-        console.log('the user id from login component is ' + this.userId);
+        if (!this.user) {
+          this.http
+            .get('http://localhost:8080/getProfile/' + this.userId)
+            .subscribe((response) => {
+              this.user = response;
+              this._dataSharingService.updateUser(this.user);
+              // this.userName = this.user.name;
+              // console.log(this.user);
+              this.router.navigate(['/']);
+            });
+        }
+        // console.log('the user id from login component is ' + this.userId);
 
-        // this.childToParent.emit(this.userId);
-
-        const navigationExtras: NavigationExtras = {
-          state: { userId: this.userId },
-        };
-        this.router.navigate(['/'], navigationExtras);
+        // const navigationExtras: NavigationExtras = {
+        //   state: { userId: this.userId },
+        // };
+        // this.router.navigate(['/'], navigationExtras);
       },
       (err) => {
-        console.log(err);
+        console.log('an error occured');
+        this.loginUnsuccessful = true;
       }
     );
   }

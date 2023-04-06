@@ -7,6 +7,7 @@ export class User {
     public phone: number,
     public address: any,
     public cart: any,
+    public orders: any,
     public role: string
   ) {}
 }

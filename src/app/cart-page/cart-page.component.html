@@ -1,17 +1,77 @@
-<app-navbar [user]="user" [userId]="userId"></app-navbar>
+<app-navbar></app-navbar>
 <div class="wrapper">
   <div class="title">
     <h1>Your Cart</h1>
   </div>
 
-  <div class="emptyMsg" *ngIf="isCartEmpty"> <h2>Your cart is currently empty</h2> </div>
+  <div class="emptyMsg" *ngIf="isCartEmpty">
+    <h2>Your cart is currently empty</h2>
+  </div>
 
   <div class="body">
+    <div *ngIf="!isCartEmpty" class="main-body">
+      <div class="itemrow">
+        <div class="miniHeading">Image</div>
+        <div class="miniHeading">Name</div>
+        <div class="miniHeading">Quantity</div>
+        <div class="miniHeading">Price</div>
+        <div class="miniHeading">Change Quantity</div>
+        <div class="miniHeading">Subtotal</div>
+      </div>
+      <div class="itemrow" *ngFor="let item of products">
+        <div class="image" style="height: 100px; width: 100px">
+          <img
+            src="{{ item.product.imgsrc }}"
+            alt="product image"
+            width="100px"
+            height="100px"
+          />
+        </div>
+        <div class="itemdetails">
+          {{ item.product.name }}
+        </div>
+        <div class="itemdetails">
+          {{ item.quantity }}
+        </div>
+        <div class="itemdetails">Rs.{{ item.product.price }}</div>
+        <div class="itemdetails" style="display: flex; align-items: flex-start">
+          <button
+            style="margin-right: 5px"
+            class="incDecBtn btn btn-primary"
+            (click)="increaseQuantity(item.product.id)"
+          >
+            +
+          </button>
+          <button
+            class="incDecBtn btn btn-secondary"
+            style="margin-right: 5px"
+            (click)="decreaseQuantity(item.product.id)"
+          >
+            -
+          </button>
+          <button
+            class="incDecBtn btn delBtn"
+            (click)="removeFromCart(item.product.id)"
+          >
+            <fa-icon [icon]="trashIcon"></fa-icon>
+          </button>
+        </div>
+        <div class="itemdetails">
+          Rs.{{ item.quantity * item.product.price }}
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- <div class="body">
     <div *ngIf="!isCartEmpty" class="main-body">
       <div class="column">
         <div class="miniHeading">Image</div>
-        <div *ngFor="let item of products" class="image" style="height:100px; width: 100px">
+        <div
+          *ngFor="let item of products"
+          class="image"
+          style="height: 100px; width: 100px"
+        >
           <img
             src="{{ item.product.imgsrc }}"
             alt="product image"
@@ -35,12 +95,16 @@
       <div class="column">
         <div class="miniHeading">Price</div>
         <div *ngFor="let item of products" class="itemdetails">
-         Rs.{{ item.product.price }}
+          Rs.{{ item.product.price }}
         </div>
       </div>
       <div class="column">
         <div class="miniHeading">Change Quantity</div>
-        <div *ngFor="let item of products" class="itemdetails">
+        <div
+          *ngFor="let item of products"
+          class="itemdetails"
+          style="display: flex; align-items: flex-start"
+        >
           <button
             style="margin-right: 5px"
             class="incDecBtn btn btn-primary"
@@ -48,8 +112,18 @@
           >
             +
           </button>
-          <button class="incDecBtn btn btn-secondary" (click)="decreaseQuantity(item.product.id)">
+          <button
+            class="incDecBtn btn btn-secondary"
+            style="margin-right: 5px"
+            (click)="decreaseQuantity(item.product.id)"
+          >
             -
+          </button>
+          <button
+            class="incDecBtn btn delBtn"
+            (click)="removeFromCart(item.product.id)"
+          >
+            <fa-icon [icon]="trashIcon"></fa-icon>
           </button>
         </div>
       </div>
@@ -60,11 +134,18 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div *ngIf="!isCartEmpty" class="footer">
     <div class="total">Total: Rs.{{ totalPrice }}</div>
     <div class="order">
-      <button class="btn btn-primary">Place order</button>
+      <button class="btn btn-primary" (click)="placeOrder()">
+        Place order
+      </button>
     </div>
+  </div>
+  <div class="order">
+    <button class="btn btn-primary" (click)="goToOrders()">
+      Go to your orders
+    </button>
   </div>
 </div>

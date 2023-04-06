@@ -18,13 +18,9 @@ h1 {
   border-radius: 20px;
   justify-self: flex-end;
 }
-/* .hoverpoint{
-    cursor: pointer;
-} */
+
 a {
-  
   text-decoration: none;
-  
 }
 .hoverpoint {
   cursor: pointer;

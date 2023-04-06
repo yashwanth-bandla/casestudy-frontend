@@ -7,8 +7,8 @@
     <a> <fa-icon [icon]="carticon"></fa-icon> Cart </a>
   </div>
   <!-- *ngIf="isAdmin"  -->
-  <div (click)="goToProducts()" class="right hoverpoint">  
-    <a> <fa-icon [icon]="plusicon"></fa-icon> Modify Products </a>
+  <div (click)="goToProducts()" *ngIf="isAdmin"  class="right hoverpoint">  
+    <fa-icon [icon]="plusicon"></fa-icon> <a> Modify Products </a>
   </div>
   <div (click)="logOutUser()" class="right hoverpoint">
     <a><fa-icon [icon]="usericon"></fa-icon> SignOut</a>
