@@ -18,31 +18,31 @@
         <div class="miniHeading">Subtotal</div>
         <div class="miniHeading">Status</div>
       </div>
-      <div class="itemrow" *ngFor="let item of products">
-        <div class="image" style="height: 100px; width: 100px">
-          <img
-            src="{{ item.product.imgsrc }}"
-            alt="product image"
-            width="100px"
-            height="100px"
-          />
-        </div>
-        <div class="itemdetails">
-          {{ item.product.name }}
-        </div>
-        <div class="itemdetails">
-          {{ item.quantity }}
-        </div>
-        <div class="itemdetails">Rs.{{ item.product.price }}</div>
-        <div class="itemdetails">
-          Rs.{{ item.quantity * item.product.price }}
-        </div>
-        <div class="itemdetails">
-            {{ this.user.orders.orderStatus }}
+      <div  *ngFor="let item1 of user.orders">
+        <div class="itemrow" *ngFor="let item of item1.orderedProducts">
+          <div class="image" style="height: 100px; width: 100px">
+            <img
+              src="{{ item.product.imgsrc }}"
+              alt="product image"
+              width="100px"
+              height="100px"
+            />
           </div>
+          <div class="itemdetails">
+            {{ item.product.name }}
+          </div>
+          <div class="itemdetails">
+            {{ item.quantity }}
+          </div>
+          <div class="itemdetails">Rs.{{ item.product.price }}</div>
+          <div class="itemdetails">
+            Rs.{{ item.quantity * item.product.price }}
+          </div>
+          <div class="itemdetails">
+            {{ item1.orderStatus}}
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-
 </div>

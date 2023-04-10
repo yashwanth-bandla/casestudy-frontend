@@ -25,6 +25,7 @@ export class MainPageComponent {
   userName: string;
   responseList: any;
   searchString: string;
+  combinedList:any;
 
   filterResponse: any;
   searchResponse: any;
@@ -56,6 +57,15 @@ export class MainPageComponent {
     //       });
     //   }
     // }
+    this.http.get('http://localhost:8080/products/getCategoryAndSubcategories').subscribe(res=>{
+      this.combinedList = res;
+      this.categories = this.combinedList[0];
+      console.log(this.categories);
+      
+      this.subcategories = this.combinedList[1];
+      console.log(this.subcategories);
+      
+    })
   }
 
   ngOnInit() {
@@ -67,12 +77,12 @@ export class MainPageComponent {
 
         for (let productone in this.responseList) {
           this.items.push(this.responseList[productone]);
-          this.categories.push(this.responseList[productone].category.category);
-          this.categories = [...new Set(this.categories)];
-          this.subcategories.push(
-            this.responseList[productone].subCategory.name
-          );
-          this.subcategories = [...new Set(this.subcategories)];
+          // this.categories.push(this.responseList[productone].category.category);
+          // this.categories = [...new Set(this.categories)];
+          // this.subcategories.push(
+          //   this.responseList[productone].subCategory.name
+          // );
+          // this.subcategories = [...new Set(this.subcategories)];
           this.filteredItems.push(this.responseList[productone]);
         }
       });
