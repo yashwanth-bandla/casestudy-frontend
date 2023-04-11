@@ -14,14 +14,12 @@ export class UpdateproductComponent {
   user: any;
 
   productDetails: any = {
-    // name:'',
-    // imgsrc:'',
-    // category:{
-    //   category:''
-    // },
-    // subCategory:{
-    //   name:''
-    // }
+    category: {
+      category: '',
+    },
+    subCategory: {
+      name: '',
+    },
   };
 
   updateProductUrl: string = 'http://localhost:8080/products/update';
@@ -54,7 +52,6 @@ export class UpdateproductComponent {
       .post(this.updateProductUrl, this.productDetails)
       .subscribe((response) => {
         this.isProductUpdated = true;
-        
       });
   }
 }
